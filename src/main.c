@@ -69,12 +69,57 @@ int		verify_file(char *file_path, t_data *data)
 	return (1);
 }
 
-void	run_fdf(char *file_path, t_data data) {
+void	init_point(t_point *point) {
+	point->x = 0;
+	point->y = 0;
+	point->z = 0;
+}
+void	create_tpoints(char *str, t_data *data, int y)
+{
+	int i;
+	char **temp;
+	t_point point;
+
+	i = 0;
+	temp = ft_strsplit(str, ' ');
+	while (temp[i])
+	{
+		init_point(&point);
+		point.y = y;
+		point.x = i;
+		point.z = ft_atoi(temp[i]);
+		data->points[y][i] = point;
+		i++;
+	}
+}
+
+void	print_points(t_data data) {
+	int i;
+	int y;
+
+	i = 0;
+	y = 0;
+	while (i < data.col_len)
+	{
+		y = 0;
+		while (y < data.row_len)
+		{
+			ft_printf("(x, y, z) -> (%d, %d, %d)\n", data.points[i][y].x, data.points[i][y].y, data.points[i][y].z);
+			y++;
+		}
+		i++;
+	}
+	
+
+}
+void	run_fdf(char *file_path, t_data data)
+{
 	int fd;
 	char *str;
+	int i;
 
+	i = 0;
 	fd = open(file_path, O_RDONLY, S_IRUSR);
-	ft_printf("col_len: %d - row_len: %d\n", data.col_len, data.row_len);
 	data.points = (t_point **)malloc(sizeof(t_point *) * data.col_len);
 	if (fd == -1)
 		ft_printf("error opneing file\n");
@@ -82,12 +127,15 @@ void	run_fdf(char *file_path, t_data data) {
 	{
 		while (get_next_line(fd, &str))
 		{
-			ft_printf("str: %s\n", str);
+			data.points[i] = (t_point *)malloc(sizeof(t_point) * data.row_len);
+			create_tpoints(str, &data, i);
+			i++;
 			free(str);
 		}
 	}
+	print_points(data);
+	//create free t_points function
 	free(data.points);
-
 }
 
 void	init_data(t_data *data)
