@@ -55,11 +55,16 @@ int		verify_file(char *file_path)
 			if (i == 0)
 				row_len = get_rowlen(str);
 			if (row_len != get_rowlen(str))
+			{
+				close(fd);
+				free(str);
 				return(print_error(get_rowlen(str)));
-			ft_printf("str: %s\n", str);
+			}
+			free(str);
 			i++;
 		}
 	}
+	close(fd);
 	return (1);
 }
 
