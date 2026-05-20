@@ -3,7 +3,7 @@
 void	read_file(char *file_path)
 {
 	int fd;
-	int rd;
+	//int rd;
 	
 	fd = open(file_path, O_RDONLY, S_IRUSR);
 	if (fd == -1)
