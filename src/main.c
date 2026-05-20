@@ -36,7 +36,7 @@ int	print_error(int e) {
 }
 
 
-int		verify_file(char *file_path)
+int		verify_file(char *file_path, t_data *data)
 {
 	int fd;
 	char *str;
@@ -60,16 +60,48 @@ int		verify_file(char *file_path)
 				free(str);
 				return(print_error(get_rowlen(str)));
 			}
-			free(str);
 			i++;
 		}
 	}
+	data->col_len = i;
+	data->row_len = row_len;
 	close(fd);
 	return (1);
 }
 
+void	run_fdf(char *file_path, t_data data) {
+	int fd;
+	char *str;
+
+	fd = open(file_path, O_RDONLY, S_IRUSR);
+	ft_printf("col_len: %d - row_len: %d\n", data.col_len, data.row_len);
+	data.points = (t_point **)malloc(sizeof(t_point *) * data.col_len);
+	if (fd == -1)
+		ft_printf("error opneing file\n");
+	else
+	{
+		while (get_next_line(fd, &str))
+		{
+			ft_printf("str: %s\n", str);
+			free(str);
+		}
+	}
+	free(data.points);
+
+}
+
+void	init_data(t_data *data)
+{
+	data->points = NULL;
+	data->row_len = 0;
+	data->col_len = 0;
+}
+
 int main(int argc, char **argv) 
 {
+	t_data data;
+
+	init_data(&data);	
 	if (argc == 1)
 	{
 		ft_printf("no map passed\n");
@@ -82,7 +114,11 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		verify_file(argv[1]);
+		if (verify_file(argv[1], &data))
+		{
+			ft_printf("file verifed\n");
+			run_fdf(argv[1], data);
+		}
 	}
 
 	return (0);
