@@ -112,6 +112,27 @@ void	print_points(t_data data) {
 	
 
 }
+
+void	apply_zoom(t_data *data, int zoom) {
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < data->col_len)
+	{
+		j = 0;
+		while (j < data->row_len)
+		{
+			data->points[i][j].x *= zoom;
+			data->points[i][j].y *= zoom;
+			data->points[i][j].z *= zoom;
+			j++;
+		}
+		i++;
+	}
+}
+
 void	run_fdf(char *file_path, t_data data)
 {
 	int fd;
@@ -133,6 +154,7 @@ void	run_fdf(char *file_path, t_data data)
 			free(str);
 		}
 	}
+	apply_zoom(&data, 15);
 	print_points(data);
 	//create free t_points function
 	free(data.points);
