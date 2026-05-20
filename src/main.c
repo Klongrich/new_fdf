@@ -1,9 +1,21 @@
 #include "fdf.h"
 
-int main(int argc, char **argv) {
-	int rd;
+void	read_file(char *file_path)
+{
 	int fd;
+	int rd;
+	
+	fd = open(file_path, O_RDONLY, S_IRUSR);
+	if (fd == -1)
+		printf("error opening file\n");
+	else
+	{
+		printf("reading file_path: %s\n", file_path);
+	}
+}
 
+int main(int argc, char **argv) 
+{
 	if (argc == 1)
 	{
 		printf("no map passed\n");
@@ -16,6 +28,7 @@ int main(int argc, char **argv) {
 	}
 	else
 	{
+		read_file(argv[1]);
 		printf("valid formatting\n");		
 	}
 
