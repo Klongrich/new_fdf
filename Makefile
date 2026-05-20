@@ -14,7 +14,7 @@ all: $(NAME)
 	@gcc $(CFLAGS) $(INC) -IMLX42/include -c $< $(LIBH) $(FT_PRINTF_H)
 
 $(NAME): $(OBJ)
-	@gcc -g $(CFLAGS) $(OBJ) $(LIBS) $(LIBFT) $(FT_PRINTF -o $(NAME)
+	@gcc -g $(CFLAGS) $(OBJ) $(LIBS) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 
 clean:
 	@rm -f $(OBJ)
