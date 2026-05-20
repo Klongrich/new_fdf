@@ -4,7 +4,8 @@
 #include <unistd.h>
 #include <fcntl.h> 
 #include <math.h>
-#include "libft.h"
+#include "../libft/libft.h"
+#include "../ft_printf/printf.h"
 #include <MLX42/MLX42.h>
 
 #define WIDTH 700
