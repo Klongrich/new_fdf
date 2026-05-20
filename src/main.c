@@ -3,14 +3,17 @@
 void	read_file(char *file_path)
 {
 	int fd;
-	//int rd;
-	
+	char *str;
+
 	fd = open(file_path, O_RDONLY, S_IRUSR);
 	if (fd == -1)
 		ft_printf("error opening file\n");
 	else
 	{
-		ft_printf("reading file_path: %s\n", file_path);
+		while(get_next_line(fd, &str))
+		{
+			ft_printf("str: %s\n", str); 
+		}
 	}
 }
 
