@@ -1,0 +1,43 @@
+{
+  "tests": 5,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "Window",
+      "tests": 4,
+      "testsuite": [
+        {
+          "name": "Basic",
+          "file": "\/Users\/klongrich\/c-projects\/fdf\/MLX42\/tests\/tests.cpp",
+          "line": 18
+        },
+        {
+          "name": "SingleImage",
+          "file": "\/Users\/klongrich\/c-projects\/fdf\/MLX42\/tests\/tests.cpp",
+          "line": 49
+        },
+        {
+          "name": "MultipleImages",
+          "file": "\/Users\/klongrich\/c-projects\/fdf\/MLX42\/tests\/tests.cpp",
+          "line": 63
+        },
+        {
+          "name": "stringTortureTest",
+          "file": "\/Users\/klongrich\/c-projects\/fdf\/MLX42\/tests\/tests.cpp",
+          "line": 118
+        }
+      ]
+    },
+    {
+      "name": "MWindow",
+      "tests": 1,
+      "testsuite": [
+        {
+          "name": "Settings",
+          "file": "\/Users\/klongrich\/c-projects\/fdf\/MLX42\/tests\/tests.cpp",
+          "line": 25
+        }
+      ]
+    }
+  ]
+}

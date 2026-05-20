@@ -1,0 +1,7 @@
+unit_tests_NOT_BUILT 0 0
+MLX42.Window.Basic 1 0.319253
+MLX42.Window.SingleImage 1 0.283523
+MLX42.Window.MultipleImages 1 0.282607
+MLX42.Window.stringTortureTest 1 1.40441
+MLX42.MWindow.Settings 1 3.53287
+---

@@ -1,0 +1,138 @@
+Start testing: May 12 16:36 EDT
+----------------------------------------------------------
+1/5 Testing: MLX42.Window.Basic
+1/5 Test: MLX42.Window.Basic
+Command: "/Users/klongrich/c-projects/fdf/MLX42/build/unit_tests" "--gtest_filter=Window.Basic" "--gtest_also_run_disabled_tests"
+Directory: /Users/klongrich/c-projects/fdf/MLX42/tests
+"MLX42.Window.Basic" start time: May 12 16:36 EDT
+Output:
+----------------------------------------------------------
+Running main() from /Users/klongrich/c-projects/fdf/MLX42/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = Window.Basic
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Window
+[ RUN      ] Window.Basic
+[       OK ] Window.Basic (295 ms)
+[----------] 1 test from Window (295 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (295 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.32 sec
+----------------------------------------------------------
+Test Passed.
+"MLX42.Window.Basic" end time: May 12 16:36 EDT
+"MLX42.Window.Basic" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/5 Testing: MLX42.Window.SingleImage
+2/5 Test: MLX42.Window.SingleImage
+Command: "/Users/klongrich/c-projects/fdf/MLX42/build/unit_tests" "--gtest_filter=Window.SingleImage" "--gtest_also_run_disabled_tests"
+Directory: /Users/klongrich/c-projects/fdf/MLX42/tests
+"MLX42.Window.SingleImage" start time: May 12 16:36 EDT
+Output:
+----------------------------------------------------------
+Running main() from /Users/klongrich/c-projects/fdf/MLX42/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = Window.SingleImage
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Window
+[ RUN      ] Window.SingleImage
+[       OK ] Window.SingleImage (265 ms)
+[----------] 1 test from Window (265 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (266 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.28 sec
+----------------------------------------------------------
+Test Passed.
+"MLX42.Window.SingleImage" end time: May 12 16:36 EDT
+"MLX42.Window.SingleImage" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/5 Testing: MLX42.Window.MultipleImages
+3/5 Test: MLX42.Window.MultipleImages
+Command: "/Users/klongrich/c-projects/fdf/MLX42/build/unit_tests" "--gtest_filter=Window.MultipleImages" "--gtest_also_run_disabled_tests"
+Directory: /Users/klongrich/c-projects/fdf/MLX42/tests
+"MLX42.Window.MultipleImages" start time: May 12 16:36 EDT
+Output:
+----------------------------------------------------------
+Running main() from /Users/klongrich/c-projects/fdf/MLX42/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = Window.MultipleImages
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Window
+[ RUN      ] Window.MultipleImages
+[       OK ] Window.MultipleImages (263 ms)
+[----------] 1 test from Window (263 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (263 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.28 sec
+----------------------------------------------------------
+Test Passed.
+"MLX42.Window.MultipleImages" end time: May 12 16:36 EDT
+"MLX42.Window.MultipleImages" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/5 Testing: MLX42.Window.stringTortureTest
+4/5 Test: MLX42.Window.stringTortureTest
+Command: "/Users/klongrich/c-projects/fdf/MLX42/build/unit_tests" "--gtest_filter=Window.stringTortureTest" "--gtest_also_run_disabled_tests"
+Directory: /Users/klongrich/c-projects/fdf/MLX42/tests
+"MLX42.Window.stringTortureTest" start time: May 12 16:36 EDT
+Output:
+----------------------------------------------------------
+Running main() from /Users/klongrich/c-projects/fdf/MLX42/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = Window.stringTortureTest
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Window
+[ RUN      ] Window.stringTortureTest
+[       OK ] Window.stringTortureTest (1384 ms)
+[----------] 1 test from Window (1384 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (1384 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   1.40 sec
+----------------------------------------------------------
+Test Passed.
+"MLX42.Window.stringTortureTest" end time: May 12 16:36 EDT
+"MLX42.Window.stringTortureTest" time elapsed: 00:00:01
+----------------------------------------------------------
+
+5/5 Testing: MLX42.MWindow.Settings
+5/5 Test: MLX42.MWindow.Settings
+Command: "/Users/klongrich/c-projects/fdf/MLX42/build/unit_tests" "--gtest_filter=MWindow.Settings" "--gtest_also_run_disabled_tests"
+Directory: /Users/klongrich/c-projects/fdf/MLX42/tests
+"MLX42.MWindow.Settings" start time: May 12 16:36 EDT
+Output:
+----------------------------------------------------------
+Running main() from /Users/klongrich/c-projects/fdf/MLX42/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = MWindow.Settings
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MWindow
+[ RUN      ] MWindow.Settings
+[       OK ] MWindow.Settings (3512 ms)
+[----------] 1 test from MWindow (3512 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (3512 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   3.53 sec
+----------------------------------------------------------
+Test Passed.
+"MLX42.MWindow.Settings" end time: May 12 16:36 EDT
+"MLX42.MWindow.Settings" time elapsed: 00:00:03
+----------------------------------------------------------
+
+End testing: May 12 16:36 EDT

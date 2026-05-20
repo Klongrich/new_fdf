@@ -1,0 +1,10 @@
+*.o
+*.swp
+*.swo
+*.pch
+*.tmp
+*.gch
+other
+mine
+errors
+passed
