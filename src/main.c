@@ -133,6 +133,47 @@ void	apply_zoom(t_data *data, int zoom) {
 	}
 }
 
+
+void	draw_lines(mlx_image_t *img, t_data data)
+{
+ 	int i;
+
+	i = 0;
+	while (i < data.row_len)
+	{
+		mlx_put_pixel(img, i, 10, 0xFF0000FF);
+		i++;
+	}
+}
+
+int		draw_points(t_data data)
+{
+
+	mlx_t *mlx;
+	mlx_image_t *img;
+
+	mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
+	if (!mlx)
+	{		
+		printf("error\n");
+		fprintf(stderr, "%s", mlx_strerror(mlx_errno));
+    		return EXIT_FAILURE;
+	}
+
+	img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
+	{
+		mlx_close_window(mlx);
+		fprintf(stderr, "%s", mlx_strerror(mlx_errno));
+		return EXIT_FAILURE;
+	}
+
+	draw_lines(img, data);
+	mlx_loop(mlx);
+	return (0);
+}
+
+
 void	run_fdf(char *file_path, t_data data)
 {
 	int fd;
@@ -156,6 +197,7 @@ void	run_fdf(char *file_path, t_data data)
 	}
 	apply_zoom(&data, 15);
 	print_points(data);
+	draw_points(data);
 	//create free t_points function
 	free(data.points);
 }
