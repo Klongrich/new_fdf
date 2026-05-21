@@ -209,14 +209,46 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 	else if (y2 > y1)
 	{
 		ft_printf("y2 > y1\n");
-		// p +1
 		if (abs(sum_x) > abs(sum_y))
 		{
-
+			ft_printf("sum_x > sum_y\n");
+			y = y1;	
+			while (i < abs(sum_x))
+			{
+				mlx_put_pixel(img, x1, y, 0xFF0000FF);
+				if (p >= 0)
+				{
+					y++;
+					p = p + (2 * abs(sum_y)) - (2 * abs(sum_x)); 
+				}
+				else
+				{
+					p = p + (2 * abs(sum_y));
+				}
+				i++;
+				x1++;
+			}
 		}
 		else
 		{
+			ft_printf("sum_x > sum_y\n");
+			x = x1;
+			while (i < abs(sum_y))
+			{
+				mlx_put_pixel(img, x, y1, 0xFF0000FF);
+				if (p >= 0)
+				{
+					x++;
+					p = p + (2 * abs(sum_x)) - (2 * abs(sum_y));
 
+				}
+				else
+				{
+					p = p + (2 * abs(sum_x));
+				}
+				i++;
+				y1++;
+			}
 		}
 	}
 	else if (y2 == y1)
@@ -246,6 +278,10 @@ void	draw_lines(mlx_image_t *img, t_data data)
 	put_line(img, 100, 200, 300, 15);
 	//dy > dx negative slope
 	put_line(img, 100, 200, 150, 5);
+	//dx > dy positive slope
+	put_line(img, 200, 5, 400, 50);
+	//dy > dx positive slope
+	put_line(img, 150, 15, 200, 150); 
 	while (i < data.row_len)
 	{
 		mlx_put_pixel(img, i, 10, 0xFF0000FF);
