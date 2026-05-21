@@ -267,8 +267,11 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 void	draw_lines(mlx_image_t *img, t_data data)
 {
  	int i;
+	int j;
 
 	i = 0;
+	j = 0;
+	/*
 	//put_line(img, x1, y1, x2, y2)
 	//horizontal
 	put_line(img, 0, 50, 100, 50);
@@ -282,9 +285,19 @@ void	draw_lines(mlx_image_t *img, t_data data)
 	put_line(img, 200, 5, 400, 50);
 	//dy > dx positive slope
 	put_line(img, 150, 15, 200, 150); 
-	while (i < data.row_len)
+	*/
+
+	while (i < data.col_len)
 	{
-		mlx_put_pixel(img, i, 10, 0xFF0000FF);
+		j = 0;
+		while (j < data.row_len)
+		{
+			if (j + 1 != data.row_len)
+				put_line(img, data.points[i][j].x, data.points[i][j].y, data.points[i][j + 1].x, data.points[i][j].y);
+			if (i + 1 != data.col_len)
+				put_line(img, data.points[i][j].x, data.points[i][j].y, data.points[i][j].x, data.points[i + 1][j].y);
+			j++;
+		}
 		i++;
 	}
 }
@@ -338,7 +351,7 @@ void	run_fdf(char *file_path, t_data data)
 			free(str);
 		}
 	}
-	apply_zoom(&data, 15);
+	apply_zoom(&data, 30);
 	print_points(data);
 	draw_points(data);
 	free(data.points);
