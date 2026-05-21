@@ -134,11 +134,118 @@ void	apply_zoom(t_data *data, int zoom) {
 }
 
 
+void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
+	int i;
+	int sum_x;
+	int sum_y;
+	int y;
+	int x;
+	int p;
+
+	i = 0;
+	sum_x = x2 - x1;
+	sum_y = y2 -y1;
+	p = (2 * abs(sum_y)) - sum_x;
+	ft_printf("p: %d\n", p);
+	if (x1 == x2)
+	{
+		//verical line
+		ft_printf("vertical line\n");
+		while (i < abs(sum_y))
+		{
+			mlx_put_pixel(img, x1, y1, 0xFF0000FF);
+			i++;
+			y1++;
+		}
+		
+	}
+	if (y2 < y1)
+	{
+		ft_printf("y2 < y1\n");
+		//p -1
+		if (abs(sum_x) > abs(sum_y))
+		{
+			ft_printf("sum_x > sum_y\n");
+			y = y1;	
+			while (i < abs(sum_x))
+			{
+				mlx_put_pixel(img, x1, y, 0xFF0000FF);
+				if (p >= 0)
+				{
+					y--;
+					p = p + (2 * abs(sum_y)) - (2 * abs(sum_x)); 
+				}
+				else
+				{
+					p = p + (2 * abs(sum_y));
+				}
+				i++;
+				x1++;
+			}
+		}
+		else
+		{
+			ft_printf("sum_x > sum_y\n");
+			x = x1;
+			while (i < abs(sum_y))
+			{
+				mlx_put_pixel(img, x, y1, 0xFF0000FF);
+				if (p >= 0)
+				{
+					x--;
+					p = p + (2 * abs(sum_x)) - (2 * abs(sum_y));
+
+				}
+				else
+				{
+					p = p + (2 * abs(sum_x));
+				}
+				i++;
+				y1++;
+			}
+
+		}
+	}
+	else if (y2 > y1)
+	{
+		ft_printf("y2 > y1\n");
+		// p +1
+		if (abs(sum_x) > abs(sum_y))
+		{
+
+		}
+		else
+		{
+
+		}
+	}
+	else if (y2 == y1)
+	{
+		//horiztonal line
+		while (i < abs(sum_x))
+		{
+			mlx_put_pixel(img, x1, y1, 0xFF0000FF);
+			i++;
+			x1++;
+		}
+	}	
+
+}
+
 void	draw_lines(mlx_image_t *img, t_data data)
 {
  	int i;
 
 	i = 0;
+	//put_line(img, x1, y1, x2, y2)
+	//horizontal
+	put_line(img, 0, 50, 100, 50);
+	//vertcial
+	put_line(img, 100, 0, 100, 300);	 
+	//dx > dy negative slope
+	put_line(img, 100, 200, 300, 15);
+	//dy > dx negative slope
+	put_line(img, 100, 200, 150, 5);
 	while (i < data.row_len)
 	{
 		mlx_put_pixel(img, i, 10, 0xFF0000FF);
@@ -198,7 +305,6 @@ void	run_fdf(char *file_path, t_data data)
 	apply_zoom(&data, 15);
 	print_points(data);
 	draw_points(data);
-	//create free t_points function
 	free(data.points);
 }
 
