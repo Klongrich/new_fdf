@@ -104,13 +104,55 @@ void	print_points(t_data data) {
 		y = 0;
 		while (y < data.row_len)
 		{
-			ft_printf("(x, y, z) -> (%d, %d, %d)\n", data.points[i][y].x, data.points[i][y].y, data.points[i][y].z);
+			printf("(x, y, z) -> (%d, %d, %d)\n", data.points[i][y].x, data.points[i][y].y, data.points[i][y].z);
 			y++;
 		}
 		i++;
 	}
 	
 
+}
+
+void	apply_center(t_data *data)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < data->col_len)
+	{
+		j = 0;
+		while (j < data->row_len)
+		{
+			data->points[i][j].x += (WIDTH / 2);
+			data->points[i][j].y += (HEIGHT / 2);
+			data->points[i][j].z += (HEIGHT / 2);
+			j++;
+		}
+		i++;
+	}
+
+}
+
+void	apply_isometric(t_data *data) {
+	int i;
+	int j;
+	int x;
+
+	x = 0;
+	i = 0;
+	while (i < data->col_len)
+	{
+		j = 0;
+		while (j < data->row_len)
+		{
+			x = data->points[i][j].x;
+			data->points[i][j].x = (int)(x - data->points[i][j].y) * cos(0.523599);
+			data->points[i][j].y = (int)(x + data->points[i][j].y) * sin(0.523599) - data->points[i][j].z;
+			j++;
+		}
+		i++;
+	}
 }
 
 void	apply_zoom(t_data *data, int zoom) {
@@ -126,7 +168,7 @@ void	apply_zoom(t_data *data, int zoom) {
 		{
 			data->points[i][j].x *= zoom;
 			data->points[i][j].y *= zoom;
-			data->points[i][j].z *= zoom;
+			//data->points[i][j].z *= zoom;
 			j++;
 		}
 		i++;
@@ -144,9 +186,10 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 
 	i = 0;
 	sum_x = x2 - x1;
-	sum_y = y2 -y1;
+	sum_y = y2 - y1;
 	p = (2 * abs(sum_y)) - sum_x;
-	ft_printf("p: %d\n", p);
+	printf("p: %d\n", p);
+	printf("(x1, y1) - (x2, y2) -> (%d, %d) - (%d, %d)\n", x1, y1, x2, y2);
 	if (x1 == x2)
 	{
 		//verical line
@@ -180,7 +223,10 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 					p = p + (2 * abs(sum_y));
 				}
 				i++;
-				x1++;
+				if (x1 > x2)
+					x1--;
+				else
+					x1++;
 			}
 		}
 		else
@@ -215,6 +261,7 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 			y = y1;	
 			while (i < abs(sum_x))
 			{
+				printf("putting line\n");
 				mlx_put_pixel(img, x1, y, 0xFF0000FF);
 				if (p >= 0)
 				{
@@ -226,7 +273,10 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 					p = p + (2 * abs(sum_y));
 				}
 				i++;
-				x1++;
+				if (x1 > x2)
+					x1--;
+				else
+					x1++;
 			}
 		}
 		else
@@ -238,7 +288,10 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 				mlx_put_pixel(img, x, y1, 0xFF0000FF);
 				if (p >= 0)
 				{
-					x++;
+					if (x1 > x2)
+						x--;
+					else
+						x++;
 					p = p + (2 * abs(sum_x)) - (2 * abs(sum_y));
 
 				}
@@ -272,6 +325,7 @@ void	draw_lines(mlx_image_t *img, t_data data)
 	i = 0;
 	j = 0;
 	/*
+	if(data.col_len){};
 	//put_line(img, x1, y1, x2, y2)
 	//horizontal
 	put_line(img, 0, 50, 100, 50);
@@ -285,6 +339,8 @@ void	draw_lines(mlx_image_t *img, t_data data)
 	put_line(img, 200, 5, 400, 50);
 	//dy > dx positive slope
 	put_line(img, 150, 15, 200, 150); 
+	//x1 > x2
+	put_line(img, 20, 20, 5, 30);
 	*/
 
 	while (i < data.col_len)
@@ -293,9 +349,10 @@ void	draw_lines(mlx_image_t *img, t_data data)
 		while (j < data.row_len)
 		{
 			if (j + 1 != data.row_len)
-				put_line(img, data.points[i][j].x, data.points[i][j].y, data.points[i][j + 1].x, data.points[i][j].y);
+				put_line(img, data.points[i][j].x, data.points[i][j].y, data.points[i][j + 1].x, data.points[i][j + 1].y);
 			if (i + 1 != data.col_len)
-				put_line(img, data.points[i][j].x, data.points[i][j].y, data.points[i][j].x, data.points[i + 1][j].y);
+				put_line(img, data.points[i][j].x, data.points[i][j].y, data.points[i + 1][j].x, data.points[i + 1][j].y);
+			printf("exited put_line\n");
 			j++;
 		}
 		i++;
@@ -316,7 +373,7 @@ int		draw_points(t_data data)
     		return EXIT_FAILURE;
 	}
 
-	img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	img = mlx_new_image(mlx, 1000, 1000);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 	{
 		mlx_close_window(mlx);
@@ -338,20 +395,27 @@ void	run_fdf(char *file_path, t_data data)
 
 	i = 0;
 	fd = open(file_path, O_RDONLY, S_IRUSR);
+	printf("blah\n");
 	data.points = (t_point **)malloc(sizeof(t_point *) * data.col_len);
+	printf("col_len: %d - row_len: %d\n", data.col_len, data.row_len);
 	if (fd == -1)
 		ft_printf("error opneing file\n");
 	else
 	{
 		while (get_next_line(fd, &str))
 		{
+			printf("reading data\n");
 			data.points[i] = (t_point *)malloc(sizeof(t_point) * data.row_len);
+			printf("point malloced\n");
 			create_tpoints(str, &data, i);
+			printf("created point\n");
 			i++;
 			free(str);
 		}
 	}
-	apply_zoom(&data, 30);
+	apply_zoom(&data, 15);
+	apply_isometric(&data);
+	apply_center(&data);
 	print_points(data);
 	draw_points(data);
 	free(data.points);
