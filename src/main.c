@@ -4,6 +4,8 @@ int		contains_number(char *str) {
 	int i;
 
 	i = 0;
+	if (str[i] == '-')
+		i++;
 	while (str[i]) {
 		if (!ft_isdigit(str[i]))
 			return (0);
@@ -373,7 +375,7 @@ int		draw_points(t_data data)
     		return EXIT_FAILURE;
 	}
 
-	img = mlx_new_image(mlx, 1000, 1000);
+	img = mlx_new_image(mlx, 3000, 3000);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 	{
 		mlx_close_window(mlx);
