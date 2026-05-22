@@ -55,7 +55,16 @@ int		verify_file(char *file_path, t_data *data)
 		while(get_next_line(fd, &str))
 		{
 			if (i == 0)
+			{
 				row_len = get_rowlen(str);
+				if (row_len == -1)
+				{
+					close(fd);
+					free(str);
+					return (-1);
+				}
+					
+			}
 			if (row_len != get_rowlen(str))
 			{
 				close(fd);
