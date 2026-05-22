@@ -21,6 +21,7 @@ int		get_rowlen(char	*row) {
 	i = 0;
 	temp = ft_strsplit(row, ' ');
 	while (temp[i]) {
+		printf("temp: %s\n", temp[i]);
 		if (!contains_number(temp[i]))
 			return (-1);
 		i++;
@@ -54,6 +55,7 @@ int		verify_file(char *file_path, t_data *data)
 	{
 		while(get_next_line(fd, &str))
 		{
+			printf("reading file\n");
 			if (i == 0)
 			{
 				row_len = get_rowlen(str);
@@ -61,17 +63,21 @@ int		verify_file(char *file_path, t_data *data)
 				{
 					close(fd);
 					free(str);
+					printf("error -1\n");
 					return (-1);
 				}
 					
 			}
 			if (row_len != get_rowlen(str))
 			{
+				printf("row_len error\n");
 				close(fd);
 				free(str);
 				return(print_error(get_rowlen(str)));
 			}
 			i++;
+			printf("i: %d; str: %s\n", i, str);
+			free(str);
 		}
 	}
 	data->col_len = i;
@@ -442,7 +448,9 @@ void	init_data(t_data *data)
 int main(int argc, char **argv) 
 {
 	t_data data;
+	int res;
 
+	res = 0;
 	init_data(&data);	
 	if (argc == 1)
 	{
@@ -456,7 +464,9 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		if (verify_file(argv[1], &data))
+		res = verify_file(argv[1], &data);
+		printf("verified file\n");
+		if (res != -1 && res)
 		{
 			ft_printf("file verifed\n");
 			run_fdf(argv[1], data);
