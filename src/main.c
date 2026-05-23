@@ -388,6 +388,10 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 		image->instances[0].y -= 5;
 	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS)
 		image->instances[0].y += 5;
+	if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
+	{
+		ft_memset(image->pixels, 0, image->width * image->height * 4);
+	}
 }
 
 int		draw_points(t_data data)
