@@ -376,20 +376,18 @@ void	draw_lines(mlx_image_t *img, t_data data)
 	}
 }
 
-void ft_hook(void* param)
+void my_keyhook(mlx_key_data_t keydata, void* param)
 {
-	mlx_t* mlx = param;
+	mlx_image_t *image = param;
 
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		printf("escape key\n");
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		printf("key up\n");
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		printf("key down\n");
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		printf("key left\n");
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		printf("key right\n");
+	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
+		image->instances[0].x += 5;
+	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
+		image->instances[0].x -= 5;
+	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS)
+		image->instances[0].y -= 5;
+	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS)
+		image->instances[0].y += 5;
 }
 
 int		draw_points(t_data data)
@@ -414,7 +412,7 @@ int		draw_points(t_data data)
 		return EXIT_FAILURE;
 	}
 
-	mlx_loop_hook(mlx, ft_hook, mlx);
+	mlx_key_hook(mlx, &my_keyhook, img);
 	draw_lines(img, data);
 	mlx_loop(mlx);
 	return (0);
