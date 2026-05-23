@@ -334,7 +334,7 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 
 }
 
-void	draw_lines(mlx_image_t *img, t_data data)
+void	draw_lines(mlx_image_t *img, t_data *data)
 {
  	int i;
 	int j;
@@ -360,15 +360,15 @@ void	draw_lines(mlx_image_t *img, t_data data)
 	put_line(img, 20, 20, 5, 30);
 	*/
 
-	while (i < data.col_len)
+	while (i < data->col_len)
 	{
 		j = 0;
-		while (j < data.row_len)
+		while (j < data->row_len)
 		{
-			if (j + 1 != data.row_len)
-				put_line(img, data.points[i][j].x, data.points[i][j].y, data.points[i][j + 1].x, data.points[i][j + 1].y);
-			if (i + 1 != data.col_len)
-				put_line(img, data.points[i][j].x, data.points[i][j].y, data.points[i + 1][j].x, data.points[i + 1][j].y);
+			if (j + 1 != data->row_len)
+				put_line(img, data->points[i][j].x, data->points[i][j].y, data->points[i][j + 1].x, data->points[i][j + 1].y);
+			if (i + 1 != data->col_len)
+				put_line(img, data->points[i][j].x, data->points[i][j].y, data->points[i + 1][j].x, data->points[i + 1][j].y);
 			printf("exited put_line\n");
 			j++;
 		}
@@ -378,47 +378,46 @@ void	draw_lines(mlx_image_t *img, t_data data)
 
 void my_keyhook(mlx_key_data_t keydata, void* param)
 {
-	mlx_image_t *image = param;
+	t_data *data = param;
 
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
-		image->instances[0].x += 5;
+		data->img->instances[0].x += 5;
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
-		image->instances[0].x -= 5;
+		data->img->instances[0].x -= 5;
 	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS)
-		image->instances[0].y -= 5;
+		data->img->instances[0].y -= 5;
 	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS)
-		image->instances[0].y += 5;
+	{
+		printf("pressed down\n");
+		data->img->instances[0].y += 5;
+	}
 	if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
 	{
-		ft_memset(image->pixels, 0, image->width * image->height * 4);
+		ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
 	}
 }
 
-int		draw_points(t_data data)
+int		draw_points(t_data *data)
 {
-
-	mlx_t *mlx;
-	mlx_image_t *img;
-
-	mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
-	if (!mlx)
+	data->mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
+	if (!data->mlx)
 	{		
 		printf("error\n");
 		fprintf(stderr, "%s", mlx_strerror(mlx_errno));
     		return EXIT_FAILURE;
 	}
 
-	img = mlx_new_image(mlx, 3000, 3000);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
+	data->img = mlx_new_image(data->mlx, 3000, 3000);
+	if (!data->img || (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0))
 	{
-		mlx_close_window(mlx);
+		mlx_close_window(data->mlx);
 		fprintf(stderr, "%s", mlx_strerror(mlx_errno));
 		return EXIT_FAILURE;
 	}
 
-	mlx_key_hook(mlx, &my_keyhook, img);
-	draw_lines(img, data);
-	mlx_loop(mlx);
+	mlx_key_hook(data->mlx, &my_keyhook, data);
+	draw_lines(data->img, data);
+	mlx_loop(data->mlx);
 	return (0);
 }
 
@@ -453,7 +452,7 @@ void	run_fdf(char *file_path, t_data data)
 	apply_isometric(&data);
 	apply_center(&data);
 	print_points(data);
-	draw_points(data);
+	draw_points(&data);
 	free(data.points);
 }
 
@@ -462,6 +461,8 @@ void	init_data(t_data *data)
 	data->points = NULL;
 	data->row_len = 0;
 	data->col_len = 0;
+	data->mlx = NULL;
+	data->img = NULL;
 }
 
 int main(int argc, char **argv) 
