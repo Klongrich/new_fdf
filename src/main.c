@@ -448,7 +448,8 @@ void	run_fdf(char *file_path, t_data data)
 			free(str);
 		}
 	}
-	apply_zoom(&data, 15);
+	data.zoom = 15;
+	apply_zoom(&data, data.zoom);
 	apply_isometric(&data);
 	apply_center(&data);
 	print_points(data);
