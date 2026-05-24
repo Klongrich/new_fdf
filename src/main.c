@@ -394,6 +394,7 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
 	{
 		ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
+		put_line(data->img, 100, 0, 100, 300);
 	}
 }
 
