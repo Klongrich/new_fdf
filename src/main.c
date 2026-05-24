@@ -384,8 +384,12 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 		data->img->instances[0].x += 5;
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_REPEAT)
 		data->img->instances[0].x += 5;
+	
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
 		data->img->instances[0].x -= 5;
+	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_REPEAT)
+		data->img->instances[0].x -= 5;
+	
 	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS)
 		data->img->instances[0].y -= 5;
 	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS)
