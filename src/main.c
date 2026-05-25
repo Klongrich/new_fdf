@@ -433,7 +433,6 @@ int		draw_points(t_data *data)
 	return (0);
 }
 
-
 void	run_fdf(char *file_path, t_data data)
 {
 	int fd;
@@ -466,12 +465,14 @@ void	run_fdf(char *file_path, t_data data)
 	apply_center(&data);
 	print_points(data);
 	draw_points(&data);
-	free(data.points);
+	
+	//free(data.points);
 }
 
 void	init_data(t_data *data)
 {
 	data->points = NULL;
+	data->converted_points = NULL;
 	data->row_len = 0;
 	data->col_len = 0;
 	data->mlx = NULL;
