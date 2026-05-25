@@ -21,6 +21,7 @@ typedef struct point {
 
 typedef struct data {
 	t_point **points;
+	t_point **converted_points;
 	int col_len;
 	int row_len;
 	int zoom;
