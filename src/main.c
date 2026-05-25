@@ -126,9 +126,8 @@ void	print_points(t_data data) {
 		}
 		i++;
 	}
-	
-
 }
+
 
 void	apply_center(t_data *data)
 {
@@ -396,7 +395,7 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 
 	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS)
 		data->img->instances[0].y += 5;
-	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_REPEAT)
 		data->img->instances[0].y += 5;
 
 	if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
@@ -433,6 +432,23 @@ int		draw_points(t_data *data)
 	return (0);
 }
 
+
+t_point		**copy_points(t_data data)
+{
+	t_point **res;
+	int i;
+
+	i = 0;
+	res = (t_point **)malloc(sizeof(t_point *) * data.col_len);
+	while (i < data.col_len)
+	{	
+		res[i] = (t_point *)malloc(sizeof(t_point) * data.row_len);
+		res[i] = data.points[i];
+		i++;
+	}
+	return  (res);
+}
+
 void	run_fdf(char *file_path, t_data data)
 {
 	int fd;
@@ -459,6 +475,7 @@ void	run_fdf(char *file_path, t_data data)
 			free(str);
 		}
 	}
+	data.converted_points = copy_points(data);
 	data.zoom = 15;
 	apply_zoom(&data, data.zoom);
 	apply_isometric(&data);
