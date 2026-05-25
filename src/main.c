@@ -391,6 +391,9 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	
 	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS)
 		data->img->instances[0].y -= 5;
+	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_REPEAT)
+		data->img->instances[0].y -= 5;
+
 	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS)
 		data->img->instances[0].y += 5;
 	if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
