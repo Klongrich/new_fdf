@@ -335,7 +335,7 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 
 }
 
-void	draw_lines(mlx_image_t *img, t_data *data)
+void	draw_lines(mlx_image_t *img, t_data *data, t_point **points)
 {
  	int i;
 	int j;
@@ -367,9 +367,9 @@ void	draw_lines(mlx_image_t *img, t_data *data)
 		while (j < data->row_len)
 		{
 			if (j + 1 != data->row_len)
-				put_line(img, data->points[i][j].x, data->points[i][j].y, data->points[i][j + 1].x, data->points[i][j + 1].y);
+				put_line(img, points[i][j].x, points[i][j].y, points[i][j + 1].x, points[i][j + 1].y);
 			if (i + 1 != data->col_len)
-				put_line(img, data->points[i][j].x, data->points[i][j].y, data->points[i + 1][j].x, data->points[i + 1][j].y);
+				put_line(img, points[i][j].x, points[i][j].y, points[i + 1][j].x, points[i + 1][j].y);
 			printf("exited put_line\n");
 			j++;
 		}
@@ -430,7 +430,7 @@ int		draw_points(t_data *data)
 	}
 	
 	mlx_key_hook(data->mlx, &my_keyhook, data);
-	draw_lines(data->img, data);
+	draw_lines(data->img, data, data->points);
 	mlx_loop(data->mlx);
 	return (0);
 }
@@ -480,14 +480,12 @@ void	run_fdf(char *file_path, t_data data)
 	}
 	data.converted_points = copy_points(data); 
 	print_points(data, 1);
-	/*
 	data.zoom = 15;
 	apply_zoom(&data, data.zoom);
 	apply_isometric(&data);
 	apply_center(&data);
 	print_points(data, 0);
 	draw_points(&data);
-	*/
 	//free(data.points);
 }
 
