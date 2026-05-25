@@ -110,7 +110,7 @@ void	create_tpoints(char *str, t_data *data, int y)
 	}
 }
 
-void	print_points(t_data data) {
+void	print_points(t_data data, int print_converted) {
 	int i;
 	int y;
 
@@ -121,7 +121,10 @@ void	print_points(t_data data) {
 		y = 0;
 		while (y < data.row_len)
 		{
-			printf("(x, y, z) -> (%d, %d, %d)\n", data.points[i][y].x, data.points[i][y].y, data.points[i][y].z);
+			if (print_converted)
+				printf("(x, y, z) -> (%d, %d, %d)\n", data.converted_points[i][y].x, data.converted_points[i][y].y, data.converted_points[i][y].z);
+			else
+				printf("(x, y, z) -> (%d, %d, %d)\n", data.points[i][y].x, data.points[i][y].y, data.points[i][y].z);
 			y++;
 		}
 		i++;
@@ -475,14 +478,16 @@ void	run_fdf(char *file_path, t_data data)
 			free(str);
 		}
 	}
-	data.converted_points = copy_points(data);
+	data.converted_points = copy_points(data); 
+	print_points(data, 1);
+	/*
 	data.zoom = 15;
 	apply_zoom(&data, data.zoom);
 	apply_isometric(&data);
 	apply_center(&data);
-	print_points(data);
+	print_points(data, 0);
 	draw_points(&data);
-	
+	*/
 	//free(data.points);
 }
 
