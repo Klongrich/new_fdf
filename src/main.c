@@ -433,14 +433,15 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 		ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
 
 		data->zoom -= 5;
-		set_original_point_values(data);
+		data->points = data->converted_points;
 		printf("values set\n");
 		print_points(data, 1);
 		print_points(data, 0);
 		apply_zoom(data, data->zoom);
 		apply_isometric(data);
 		apply_center(data);
-		draw_lines(data->img, data, data->points);
+		print_points(data, 0);
+		//draw_lines(data->img, data, data->points);
 	}
 
 	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
