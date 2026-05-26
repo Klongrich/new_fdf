@@ -407,14 +407,12 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 		ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
 
 		data->zoom -= 5;
-		//data->points = data->converted_points;
+		data->points = data->converted_points;
 		print_points(data, 1);
-		/*
 		apply_zoom(data, data->zoom);
 		apply_isometric(data);
 		apply_center(data);
 		draw_lines(data->img, data, data->points);
-		*/
 		//put_line(data->img, 100, 0, 100, 300);
 	}
 
