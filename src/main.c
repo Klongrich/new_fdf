@@ -106,6 +106,7 @@ void	create_tpoints(char *str, t_data *data, int y)
 		point.x = i;
 		point.z = ft_atoi(temp[i]);
 		data->points[y][i] = point;
+		data->converted_points[y][i] = point;
 		i++;
 	}
 }
@@ -407,7 +408,7 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 
 		data->zoom -= 5;
 		//data->points = data->converted_points;
-		print_points(data, 0);
+		print_points(data, 1);
 		/*
 		apply_zoom(data, data->zoom);
 		apply_isometric(data);
@@ -472,6 +473,7 @@ void	run_fdf(char *file_path, t_data data)
 	fd = open(file_path, O_RDONLY, S_IRUSR);
 	printf("blah\n");
 	data.points = (t_point **)malloc(sizeof(t_point *) * data.col_len);
+	data.converted_points = (t_point **)malloc(sizeof(t_point *) * data.col_len);
 	printf("col_len: %d - row_len: %d\n", data.col_len, data.row_len);
 	if (fd == -1)
 		ft_printf("error opneing file\n");
@@ -481,6 +483,7 @@ void	run_fdf(char *file_path, t_data data)
 		{
 			printf("reading data\n");
 			data.points[i] = (t_point *)malloc(sizeof(t_point) * data.row_len);
+			data.converted_points[i] = (t_point *)malloc(sizeof(t_point) * data.row_len);
 			printf("point malloced\n");
 			create_tpoints(str, &data, i);
 			printf("created point\n");
@@ -488,7 +491,6 @@ void	run_fdf(char *file_path, t_data data)
 			free(str);
 		}
 	}
-	data.converted_points = copy_points(data); 
 	print_points(&data, 1);
 	data.zoom = 15;
 	apply_zoom(&data, data.zoom);
