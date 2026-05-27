@@ -463,10 +463,10 @@ void	add_z(t_data *data, int val)
 	}
 }
 
-void	increase_z(t_data *data)
+void	increment_z(t_data *data, int val)
 {
 	ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
-	add_z(data, 5);
+	add_z(data, val);
 	set_original_point_values(data);
 	apply_zoom(data, data->zoom);
 	apply_isometric(data);
@@ -502,12 +502,10 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 		zoom_image(data, -5);
 	if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS)
 		zoom_image(data, 5);
-
 	if (keydata.key == MLX_KEY_K && keydata.action == MLX_PRESS)
-	{
-		increase_z(data);
-	}
-
+		increment_z(data, 5);
+	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
+		increment_z(data, -5);
 	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
 		remove_isometric(data);
 }
