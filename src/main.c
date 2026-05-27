@@ -453,10 +453,7 @@ void	add_z(t_data *data, int val)
 		while (x < data->row_len)
 		{
 			if (data->converted_points[y][x].z != 0)
-			{
 				data->converted_points[y][x].z += val;
-				printf("z-value: %d\n", data->converted_points[y][x].z);
-			}
 			x++;
 		}
 		y++;
