@@ -209,6 +209,43 @@ void	put_vertical_line(mlx_image_t *img, int x1, int y1, int sum_y)
 	}
 }
 
+void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2)
+{
+	int	dx = abs(x2 - x1);
+	int	dy = abs(y2 - y1);
+	int	sx = (x1 < x2) ? 1 : -1;
+	int	sy = (y1 < y2) ? 1 : -1;
+	int	err = dx - dy;
+	int	e2;
+
+	while (1)
+	{
+		// Draw current pixel (0xFF0000FF = Solid Red)
+		mlx_put_pixel(img, x1, y1, 0xFF0000FF);
+
+		// Stop when the destination point is reached
+		if (x1 == x2 && y1 == y2)
+			break;
+
+		e2 = 2 * err;
+		
+		// Move along the X axis
+		if (e2 > -dy)
+		{
+			err -= dy;
+			x1 += sx;
+		}
+		
+		// Move along the Y axis
+		if (e2 < dx)
+		{
+			err += dx;
+			y1 += sy;
+		}
+	}
+}
+
+/*
 void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 	int i;
 	int sum_x;
@@ -221,8 +258,8 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 	sum_x = x2 - x1;
 	sum_y = y2 - y1;
 	p = (2 * abs(sum_y)) - sum_x;
-	//printf("p: %d\n", p);
-	//printf("(x1, y1) - (x2, y2) -> (%d, %d) - (%d, %d)\n", x1, y1, x2, y2);
+	printf("p: %d\n", p);
+	printf("(x1, y1) - (x2, y2) -> (%d, %d) - (%d, %d)\n", x1, y1, x2, y2);
 	if (x1 == x2)
 	{
 		ft_printf("vertical line\n");
@@ -348,7 +385,7 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 	}	
 
 }
-
+*/
 void	draw_lines(mlx_image_t *img, t_data *data, t_point **points)
 {
  	int i;
@@ -469,6 +506,7 @@ void	increment_z(t_data *data, int val)
 	apply_isometric(data);
 	apply_center(data);
 	draw_lines(data->img, data, data->points);
+	printf("drew updated z-values\n");
 }
 
 void my_keyhook(mlx_key_data_t keydata, void* param)
