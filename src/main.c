@@ -421,6 +421,15 @@ void	zoom_image(t_data *data, int zoom)
 	draw_lines(data->img, data, data->points);
 }
 
+void	remove_isometric(t_data *data)
+{
+	ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
+	set_original_point_values(data);
+	apply_zoom(data, 15);
+	apply_center(data);
+	draw_lines(data->img, data, data->points);
+}
+
 void my_keyhook(mlx_key_data_t keydata, void* param)
 {
 	t_data *data = param;
@@ -452,7 +461,7 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 		zoom_image(data, 5);
 
 	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
-		printf("remove isometric\n");
+		remove_isometric(data);
 }
 
 int		draw_points(t_data *data)
