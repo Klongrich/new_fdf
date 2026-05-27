@@ -195,6 +195,19 @@ void	apply_zoom(t_data *data, int zoom) {
 	}
 }
 
+void	put_vertical_line(mlx_image_t *img, int x1, int y1, int sum_y)
+{
+	int i;
+
+	i = 0;
+	ft_printf("vertical line\n");
+	while (i < abs(sum_y))
+	{
+		mlx_put_pixel(img, x1, y1, 0xFF0000FF);
+		i++;
+		y1++;
+	}
+}
 
 void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 	int i;
@@ -211,17 +224,7 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 	printf("p: %d\n", p);
 	printf("(x1, y1) - (x2, y2) -> (%d, %d) - (%d, %d)\n", x1, y1, x2, y2);
 	if (x1 == x2)
-	{
-		//verical line
-		ft_printf("vertical line\n");
-		while (i < abs(sum_y))
-		{
-			mlx_put_pixel(img, x1, y1, 0xFF0000FF);
-			i++;
-			y1++;
-		}
-		
-	}
+		put_vertical_line(img, x1, y1, sum_y);
 	if (y2 < y1)
 	{
 		ft_printf("y2 < y1\n");
