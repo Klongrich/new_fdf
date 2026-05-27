@@ -465,9 +465,13 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 
 	if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
 		zoom_image(data, -5);
-
 	if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS)
 		zoom_image(data, 5);
+
+	if (keydata.key == MLX_KEY_K && keydata.action == MLX_PRESS)
+	{
+		printf("pressing k\n");
+	}
 
 	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
 		remove_isometric(data);
