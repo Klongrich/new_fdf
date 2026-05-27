@@ -382,22 +382,17 @@ void	set_original_point_values(t_data *data)
 {
 	int x;
 	int y;
-	t_point point;
 
 	x = 0;
 	y = 0;
-	free(data->points);
-	data->points = (t_point **)malloc(sizeof(t_point *) * data->col_len);
 	while (y < data->col_len)
 	{
-		data->points[y] = (t_point *)malloc(sizeof(t_point) * data->row_len);
+		x = 0;
 		while (x < data->row_len)
 		{
-			init_point(&point);
-			point.x = data->converted_points[y][x].x;
-			point.y = data->converted_points[y][x].y;
-			point.z = data->converted_points[y][x].z;
-			data->points[y][x] = point;
+			data->points[y][x].x = data->converted_points[y][x].x;
+			data->points[y][x].y = data->converted_points[y][x].y;
+			data->points[y][x].z = data->converted_points[y][x].z;
 			x++;
 		}
 		y++;
@@ -431,17 +426,18 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
 	{
 		ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
-
 		data->zoom -= 5;
-		data->points = data->converted_points;
+		set_original_point_values(data);
 		printf("values set\n");
 		print_points(data, 1);
+		printf("\n----- Original ------\n");
 		print_points(data, 0);
 		apply_zoom(data, data->zoom);
 		apply_isometric(data);
 		apply_center(data);
+		printf("\n------ After Conversion ------\n");
 		print_points(data, 0);
-		//draw_lines(data->img, data, data->points);
+		draw_lines(data->img, data, data->points);
 	}
 
 	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
