@@ -439,6 +439,42 @@ void	remove_isometric(t_data *data)
 	draw_lines(data->img, data, data->points);
 }
 
+
+void	add_z(t_data *data, int val)
+{
+	int x;
+	int y;
+
+	x = 0;
+	y = 0;
+	while (y < data->col_len)
+	{
+		x = 0;
+		while (x < data->row_len)
+		{
+			if (data->points[y][x].z != 0)
+			{
+				data->points[y][x].z += val;
+				printf("z-value: %d\n", data->points[y][x].z);
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+void	increase_z(t_data *data)
+{
+	ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
+	printf("pass memeset\n");
+	set_original_point_values(data);
+	apply_zoom(data, data->zoom);
+	add_z(data, 5);
+	apply_isometric(data);
+	apply_center(data);
+	draw_lines(data->img, data, data->points);
+}
+
 void my_keyhook(mlx_key_data_t keydata, void* param)
 {
 	t_data *data = param;
@@ -470,7 +506,9 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 
 	if (keydata.key == MLX_KEY_K && keydata.action == MLX_PRESS)
 	{
-		printf("pressing k\n");
+		printf("pressing k before\n");
+		increase_z(data);
+		printf("pressing k after\n");
 	}
 
 	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
