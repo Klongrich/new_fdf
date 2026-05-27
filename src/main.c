@@ -399,6 +399,24 @@ void	set_original_point_values(t_data *data)
 	}
 }
 
+
+void	zoom_image(t_data *data, int zoom)
+{
+	ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
+	data->zoom += zoom;
+	set_original_point_values(data);
+	printf("values set\n");
+	print_points(data, 1);
+	printf("\n----- Original ------\n");
+	print_points(data, 0);
+	apply_zoom(data, data->zoom);
+	apply_isometric(data);
+	apply_center(data);
+	printf("\n------ After Conversion ------\n");
+	print_points(data, 0);
+	draw_lines(data->img, data, data->points);
+}
+
 void my_keyhook(mlx_key_data_t keydata, void* param)
 {
 	t_data *data = param;
@@ -424,26 +442,10 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 		data->img->instances[0].y += 5;
 
 	if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
-	{
-		ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
-		data->zoom -= 5;
-		set_original_point_values(data);
-		printf("values set\n");
-		print_points(data, 1);
-		printf("\n----- Original ------\n");
-		print_points(data, 0);
-		apply_zoom(data, data->zoom);
-		apply_isometric(data);
-		apply_center(data);
-		printf("\n------ After Conversion ------\n");
-		print_points(data, 0);
-		draw_lines(data->img, data, data->points);
-	}
+		zoom_image(data, -5);
 
 	if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS)
-	{
-		printf("pressing =\n");
-	}
+		zoom_image(data, 5);
 
 	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
 		printf("remove isometric\n");
