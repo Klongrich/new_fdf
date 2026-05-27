@@ -188,6 +188,7 @@ void	apply_zoom(t_data *data, int zoom) {
 		{
 			data->points[i][j].x *= zoom;
 			data->points[i][j].y *= zoom;
+			//data->points[i][j].z *= zoom;
 			j++;
 		}
 		i++;
@@ -473,23 +474,6 @@ int		draw_points(t_data *data)
 	draw_lines(data->img, data, data->points);
 	mlx_loop(data->mlx);
 	return (0);
-}
-
-
-t_point		**copy_points(t_data data)
-{
-	t_point **res;
-	int i;
-
-	i = 0;
-	res = (t_point **)malloc(sizeof(t_point *) * data.col_len);
-	while (i < data.col_len)
-	{	
-		res[i] = (t_point *)malloc(sizeof(t_point) * data.row_len);
-		res[i] = data.points[i];
-		i++;
-	}
-	return  (res);
 }
 
 void	run_fdf(char *file_path, t_data data)
