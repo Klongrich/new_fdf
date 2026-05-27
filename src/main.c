@@ -221,8 +221,8 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 	sum_x = x2 - x1;
 	sum_y = y2 - y1;
 	p = (2 * abs(sum_y)) - sum_x;
-	printf("p: %d\n", p);
-	printf("(x1, y1) - (x2, y2) -> (%d, %d) - (%d, %d)\n", x1, y1, x2, y2);
+	//printf("p: %d\n", p);
+	//printf("(x1, y1) - (x2, y2) -> (%d, %d) - (%d, %d)\n", x1, y1, x2, y2);
 	if (x1 == x2)
 	{
 		ft_printf("vertical line\n");
@@ -293,7 +293,7 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2) {
 			y = y1;	
 			while (i < abs(sum_x))
 			{
-				printf("putting line\n");
+				//printf("putting line\n");
 				mlx_put_pixel(img, x1, y, 0xFF0000FF);
 				if (p >= 0)
 				{
@@ -452,10 +452,10 @@ void	add_z(t_data *data, int val)
 		x = 0;
 		while (x < data->row_len)
 		{
-			if (data->points[y][x].z != 0)
+			if (data->converted_points[y][x].z != 0)
 			{
-				data->points[y][x].z += val;
-				printf("z-value: %d\n", data->points[y][x].z);
+				data->converted_points[y][x].z += val;
+				printf("z-value: %d\n", data->converted_points[y][x].z);
 			}
 			x++;
 		}
@@ -466,10 +466,9 @@ void	add_z(t_data *data, int val)
 void	increase_z(t_data *data)
 {
 	ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
-	printf("pass memeset\n");
+	add_z(data, 5);
 	set_original_point_values(data);
 	apply_zoom(data, data->zoom);
-	add_z(data, 5);
 	apply_isometric(data);
 	apply_center(data);
 	draw_lines(data->img, data, data->points);
@@ -506,9 +505,7 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 
 	if (keydata.key == MLX_KEY_K && keydata.action == MLX_PRESS)
 	{
-		printf("pressing k before\n");
 		increase_z(data);
-		printf("pressing k after\n");
 	}
 
 	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
