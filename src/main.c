@@ -440,6 +440,11 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 		draw_lines(data->img, data, data->points);
 	}
 
+	if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS)
+	{
+		printf("pressing =\n");
+	}
+
 	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
 		printf("remove isometric\n");
 }
