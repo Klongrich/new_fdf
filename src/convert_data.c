@@ -57,7 +57,7 @@ void	apply_zoom(t_data *data, int zoom)
 		{
 			data->points[i][j].x *= zoom;
 			data->points[i][j].y *= zoom;
-			//data->points[i][j].z *= zoom;
+			data->points[i][j].z *= (zoom * 0.1);
 			j++;
 		}
 		i++;
