@@ -21,7 +21,6 @@ int		get_rowlen(char	*row) {
 	i = 0;
 	temp = ft_strsplit(row, ' ');
 	while (temp[i]) {
-		printf("temp: %s\n", temp[i]);
 		if (!contains_number(temp[i]))
 			return (-1);
 		i++;
@@ -55,7 +54,6 @@ int		verify_file(char *file_path, t_data *data)
 	{
 		while(get_next_line(fd, &str))
 		{
-			printf("reading file\n");
 			if (i == 0)
 			{
 				row_len = get_rowlen(str);
@@ -76,7 +74,6 @@ int		verify_file(char *file_path, t_data *data)
 				return(print_error(get_rowlen(str)));
 			}
 			i++;
-			printf("i: %d; str: %s\n", i, str);
 			free(str);
 		}
 	}
@@ -239,7 +236,6 @@ void	draw_lines(mlx_image_t *img, t_data *data, t_point **points)
 				put_line(img, points[i][j].x, points[i][j].y, points[i][j + 1].x, points[i][j + 1].y);
 			if (i + 1 != data->col_len)
 				put_line(img, points[i][j].x, points[i][j].y, points[i + 1][j].x, points[i + 1][j].y);
-			printf("exited put_line\n");
 			j++;
 		}
 		i++;
@@ -403,12 +399,10 @@ void	run_fdf(char *file_path, t_data data)
 			free(str);
 		}
 	}
-	print_points(&data, 1);
 	data.zoom = 15;
 	apply_zoom(&data, data.zoom);
 	apply_isometric(&data);
 	apply_center(&data);
-	print_points(&data, 0);
 	draw_points(&data);
 	//free(data.points);
 }
