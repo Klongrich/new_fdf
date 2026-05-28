@@ -295,15 +295,9 @@ void	zoom_image(t_data *data, int zoom)
 	ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
 	data->zoom += zoom;
 	set_original_point_values(data);
-	printf("values set\n");
-	print_points(data, 1);
-	printf("\n----- Original ------\n");
-	print_points(data, 0);
 	apply_zoom(data, data->zoom);
 	apply_isometric(data);
 	apply_center(data);
-	printf("\n------ After Conversion ------\n");
-	print_points(data, 0);
 	draw_lines(data->img, data, data->points);
 }
 
@@ -346,7 +340,6 @@ void	increment_z(t_data *data, int val)
 	apply_isometric(data);
 	apply_center(data);
 	draw_lines(data->img, data, data->points);
-	printf("drew updated z-values\n");
 }
 
 void my_keyhook(mlx_key_data_t keydata, void* param)
