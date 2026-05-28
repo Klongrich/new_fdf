@@ -28,3 +28,15 @@ typedef struct data {
 	mlx_t       *mlx;
     mlx_image_t *img;
 }		t_data;
+
+void    put_line(mlx_image_t *img, int x1, int y1, int x2, int y2);
+void    draw_lines(mlx_image_t *img, t_data *data, t_point **points);
+void    apply_center(t_data *data);
+void    apply_isometric(t_data *data);
+void    apply_zoom(t_data *data, int zoom);
+void    set_original_point_values(t_data *data);
+void    zoom_image(t_data *data, int zoom);
+void    remove_isometric(t_data *data);
+void    add_z(t_data *data, int val);
+void    increment_z(t_data *data, int val);
+

@@ -1,5 +1,5 @@
 NAME = fdf
-OBJ = main.o get_next_line.o
+OBJ = main.o get_next_line.o draw.o convert_data.o
 INC = -I inc
 CFLAGS = -Wall -Werror -Wextra
 LIBFT = libft/libft.a
