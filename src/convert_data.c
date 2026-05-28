@@ -85,16 +85,21 @@ void	set_original_point_values(t_data *data)
 	}
 }
 
+void    render_data(t_data *data)
+{
+	apply_zoom(data, data->zoom);
+	apply_isometric(data);
+	apply_center(data);
+	draw_lines(data->img, data, data->points);
+}
 
 void	zoom_image(t_data *data, int zoom)
 {
 	ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
 	data->zoom += zoom;
 	set_original_point_values(data);
-	apply_zoom(data, data->zoom);
-	apply_isometric(data);
-	apply_center(data);
-	draw_lines(data->img, data, data->points);
+
+	render_data(data);
 }
 
 void	remove_isometric(t_data *data)
@@ -132,8 +137,6 @@ void	increment_z(t_data *data, int val)
 	ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
 	add_z(data, val);
 	set_original_point_values(data);
-	apply_zoom(data, data->zoom);
-	apply_isometric(data);
-	apply_center(data);
-	draw_lines(data->img, data, data->points);
+
+	render_data(data);
 }
