@@ -220,23 +220,15 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2)
 
 	while (1)
 	{
-		// Draw current pixel (0xFF0000FF = Solid Red)
 		mlx_put_pixel(img, x1, y1, 0xFF0000FF);
-
-		// Stop when the destination point is reached
 		if (x1 == x2 && y1 == y2)
 			break;
-
 		e2 = 2 * err;
-		
-		// Move along the X axis
 		if (e2 > -dy)
 		{
 			err -= dy;
 			x1 += sx;
 		}
-		
-		// Move along the Y axis
 		if (e2 < dx)
 		{
 			err += dx;
