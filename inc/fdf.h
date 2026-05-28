@@ -39,4 +39,5 @@ void    zoom_image(t_data *data, int zoom);
 void    remove_isometric(t_data *data);
 void    add_z(t_data *data, int val);
 void    increment_z(t_data *data, int val);
+void    render_data(t_data *data);
 
