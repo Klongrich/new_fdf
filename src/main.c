@@ -410,22 +410,17 @@ void	run_fdf(char *file_path, t_data data)
 
 	i = 0;
 	fd = open(file_path, O_RDONLY, S_IRUSR);
-	printf("blah\n");
 	data.points = (t_point **)malloc(sizeof(t_point *) * data.col_len);
 	data.converted_points = (t_point **)malloc(sizeof(t_point *) * data.col_len);
-	printf("col_len: %d - row_len: %d\n", data.col_len, data.row_len);
 	if (fd == -1)
 		ft_printf("error opneing file\n");
 	else
 	{
 		while (get_next_line(fd, &str))
 		{
-			printf("reading data\n");
 			data.points[i] = (t_point *)malloc(sizeof(t_point) * data.row_len);
 			data.converted_points[i] = (t_point *)malloc(sizeof(t_point) * data.row_len);
-			printf("point malloced\n");
 			create_tpoints(str, &data, i);
-			printf("created point\n");
 			i++;
 			free(str);
 		}
@@ -470,12 +465,8 @@ int main(int argc, char **argv)
 	else
 	{
 		res = verify_file(argv[1], &data);
-		printf("verified file\n");
 		if (res != -1 && res)
-		{
-			ft_printf("file verifed\n");
 			run_fdf(argv[1], data);
-		}
 	}
 
 	return (0);
