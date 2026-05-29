@@ -129,7 +129,7 @@ void	print_points(t_data *data, int print_converted) {
 	}
 }
 
-int		draw_points(t_data *data)
+int		init_frame(t_data *data)
 {
 	data->mlx = mlx_init(WIDTH, HEIGHT, "FDF", true);
 	if (!data->mlx)
@@ -180,8 +180,7 @@ void	run_fdf(char *file_path, t_data data)
 	apply_zoom(&data, data.zoom);
 	apply_isometric(&data);
 	apply_center(&data);
-	draw_points(&data);
-	//free(data.points);
+	init_frame(&data);
 }
 
 void	init_data(t_data *data)
