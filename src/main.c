@@ -87,6 +87,7 @@ void	init_point(t_point *point) {
 	point->x = 0;
 	point->y = 0;
 	point->z = 0;
+	point->has_z_value = 0;
 }
 void	create_tpoints(char *str, t_data *data, int y)
 {
@@ -102,6 +103,8 @@ void	create_tpoints(char *str, t_data *data, int y)
 		point.y = y;
 		point.x = i;
 		point.z = ft_atoi(temp[i]);
+		if (point.z)
+			point.has_z_value = 1;
 		data->points[y][i] = point;
 		data->converted_points[y][i] = point;
 		i++;
