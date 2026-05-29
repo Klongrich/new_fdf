@@ -17,6 +17,7 @@ typedef struct point {
 	int x;
 	int y;
 	int z;
+	int	has_z_value;
 }		t_point;
 
 typedef struct data {
