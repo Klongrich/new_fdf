@@ -1,29 +1,30 @@
 #include "fdf.h"
 
-void my_keyhook(mlx_key_data_t keydata, void* param)
+void	handle_arrow_keys(mlx_key_data_t keydata, t_data *data)
 {
-	t_data *data = param;
-
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
 		data->img->instances[0].x += 5;
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_REPEAT)
 		data->img->instances[0].x += 5;
-	
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
 		data->img->instances[0].x -= 5;
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_REPEAT)
 		data->img->instances[0].x -= 5;
-	
 	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS)
 		data->img->instances[0].y -= 5;
 	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_REPEAT)
 		data->img->instances[0].y -= 5;
-
 	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS)
 		data->img->instances[0].y += 5;
 	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_REPEAT)
 		data->img->instances[0].y += 5;
+}
 
+void my_keyhook(mlx_key_data_t keydata, void* param)
+{
+	t_data *data = param;
+
+	handle_arrow_keys(keydata, data);
 	if (keydata.key == MLX_KEY_MINUS && keydata.action == MLX_PRESS)
 		zoom_image(data, -5);
 	if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS)
