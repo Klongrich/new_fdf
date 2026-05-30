@@ -124,8 +124,14 @@ void	add_z(t_data *data, int val)
 		x = 0;
 		while (x < data->row_len)
 		{
-			if (data->converted_points[y][x].has_z_value && data->converted_points[y][x].z < 100)
-				data->converted_points[y][x].z += val;
+			if (data->converted_points[y][x].has_z_value)
+			{ 
+				if (data->converted_points[y][x].z < 100 && val > 0)
+					data->converted_points[y][x].z += val;
+				if (data->converted_points[y][x].z > -100 && val < 0)
+					data->converted_points[y][x].z += val;
+
+			}
 			x++;
 		}
 		y++;
