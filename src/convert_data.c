@@ -146,3 +146,25 @@ void	increment_z(t_data *data, int val)
 
 	render_data(data);
 }
+
+void	apply_rotation(t_data *data, int degree)
+{
+	int x;
+	int y;
+	
+	x = 0;
+	y = 0;
+	ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
+	while (y < data->col_len)
+	{
+		x = 0;
+		while (x < data->row_len)
+		{
+			data->points[y][x].x = (data->points[y][x].x * cos(degree)) - (data->points[y][x].y * sin(degree));
+			data->points[y][x].y = (data->points[y][x].x * sin(degree)) + (data->points[y][x].y * cos(degree));
+			x++;
+		}
+		y++;
+	}
+	 draw_lines(data->img, data, data->points);
+}
