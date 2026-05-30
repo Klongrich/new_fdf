@@ -151,20 +151,26 @@ void	apply_rotation(t_data *data, int degree)
 {
 	int x;
 	int y;
+	int prev_x;
+	int prev_y;
 	
 	x = 0;
 	y = 0;
+	prev_x = 0;
+	prev_y = 0;
 	ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
 	while (y < data->col_len)
 	{
 		x = 0;
 		while (x < data->row_len)
 		{
-			data->points[y][x].x = (data->points[y][x].x * cos(degree)) - (data->points[y][x].y * sin(degree));
-			data->points[y][x].y = (data->points[y][x].x * sin(degree)) + (data->points[y][x].y * cos(degree));
+			prev_x = data->points[y][x].x;
+			prev_y = data->points[y][x].y;
+			data->points[y][x].x = (prev_x * cos(degree)) - (prev_y * sin(degree));
+			data->points[y][x].y = (prev_x * sin(degree)) + (prev_y * cos(degree));
 			x++;
 		}
 		y++;
 	}
-	 draw_lines(data->img, data, data->points);
+	draw_lines(data->img, data, data->points);
 }
