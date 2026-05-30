@@ -159,6 +159,8 @@ void	apply_rotation(t_data *data, int degree)
 	prev_x = 0;
 	prev_y = 0;
 	ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
+	set_original_point_values(data);
+	apply_zoom(data, data->zoom);
 	while (y < data->col_len)
 	{
 		x = 0;
@@ -172,5 +174,7 @@ void	apply_rotation(t_data *data, int degree)
 		}
 		y++;
 	}
+	apply_isometric(data);
+	apply_center(data);
 	draw_lines(data->img, data, data->points);
 }
