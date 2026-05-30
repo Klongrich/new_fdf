@@ -192,6 +192,7 @@ void	init_data(t_data *data)
 	data->converted_points = NULL;
 	data->row_len = 0;
 	data->col_len = 0;
+	data->rotation = 0;
 	data->mlx = NULL;
 	data->img = NULL;
 }

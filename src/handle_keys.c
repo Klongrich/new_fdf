@@ -36,5 +36,8 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
 		remove_isometric(data);
 	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
-		apply_rotation(data, 50);
+	{
+		data->rotation += 1;
+		apply_rotation(data, data->rotation);
+	}
 }

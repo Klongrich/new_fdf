@@ -26,6 +26,7 @@ typedef struct data {
 	int col_len;
 	int row_len;
 	int zoom;
+	int rotation;
 	mlx_t       *mlx;
     mlx_image_t *img;
 }		t_data;
