@@ -42,4 +42,5 @@ void    add_z(t_data *data, int val);
 void    increment_z(t_data *data, int val);
 void    render_data(t_data *data);
 void 	my_keyhook(mlx_key_data_t keydata, void* param);
+void    apply_rotation(t_data *data, int degree);
 
