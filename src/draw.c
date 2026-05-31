@@ -24,6 +24,7 @@ void	put_line(mlx_image_t *img, int x1, int y1, int x2, int y2)
 		{
 			err += dx;
 			y1 += sy;
+
 		}
 	}
 }
