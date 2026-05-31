@@ -30,6 +30,7 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
 	{
 		data->rotation += 1;
+
 		apply_rotation(data, data->rotation);
 	}
 }
