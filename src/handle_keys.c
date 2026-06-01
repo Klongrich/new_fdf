@@ -31,5 +31,7 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	{
 		data->rotation += 1;
 		apply_rotation(data, data->rotation);
+	
+
 	}
 }
