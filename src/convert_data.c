@@ -153,11 +153,13 @@ void	apply_rotation(t_data *data, int degree)
 	int y;
 	int prev_x;
 	int prev_y;
+	double degree_val;
 	
 	x = 0;
 	y = 0;
 	prev_x = 0;
 	prev_y = 0;
+	degree_val = (double)degree * 0.01;
 	ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
 	set_original_point_values(data);
 	apply_zoom(data, data->zoom);
@@ -168,8 +170,8 @@ void	apply_rotation(t_data *data, int degree)
 		{
 			prev_x = data->points[y][x].x;
 			prev_y = data->points[y][x].y;
-			data->points[y][x].x = (prev_x * cos(degree)) - (prev_y * sin(degree));
-			data->points[y][x].y = (prev_x * sin(degree)) + (prev_y * cos(degree));
+			data->points[y][x].x = (prev_x * cos(degree_val)) - (prev_y * sin(degree_val));
+			data->points[y][x].y = (prev_x * sin(degree_val)) + (prev_y * cos(degree_val));
 			x++;
 		}
 		y++;
