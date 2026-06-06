@@ -32,6 +32,12 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 		data->rotation += 1;
 		apply_rotation(data, data->rotation);
 	}
+	if (keydata.key == MLX_KEY_M && keydata.action == MLX_REPEAT)
+	{
+		printf("rotation: %d\n", data->rotation);
+		data->rotation += 1;
+		apply_rotation(data, data->rotation);
+	}
 	if (keydata.key == MLX_KEY_N && keydata.action == MLX_PRESS)
 	{
 		data->rotation -=1;
