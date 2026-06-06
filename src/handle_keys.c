@@ -21,8 +21,15 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 		zoom_image(data, -5);
 	if (keydata.key == MLX_KEY_EQUAL && keydata.action == MLX_PRESS)
 		zoom_image(data, 5);
-	if (keydata.key == MLX_KEY_K && keydata.action == MLX_PRESS)
-		increment_z(data, 5);
+	
+	if (keydata.key == MLX_KEY_K)
+	{
+		if (keydata.action == MLX_PRESS)
+			data->z_increase = 1;
+		if (keydata.action == MLX_RELEASE)
+			data->z_increase = 0;
+	}
+
 	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
 		increment_z(data, -5);
 	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
@@ -34,7 +41,6 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	}
 	if (keydata.key == MLX_KEY_M && keydata.action == MLX_REPEAT)
 	{
-		printf("rotation: %d\n", data->rotation);
 		data->rotation += 1;
 		apply_rotation(data, data->rotation);
 	}
@@ -44,4 +50,12 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 		apply_rotation(data, data->rotation);
 	}
 
+}
+
+void	my_frameupdate(void	*param)
+{
+	t_data *data = param;
+
+	if (data->z_increase)
+	 	increment_z(data, 5);
 }

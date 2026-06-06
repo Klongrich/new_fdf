@@ -152,6 +152,7 @@ int		init_frame(t_data *data)
 	}
 	
 	mlx_key_hook(data->mlx, &my_keyhook, data);
+	mlx_loop_hook(data->mlx, &my_frameupdate, data);
 	draw_lines(data->img, data, data->points);
 	mlx_loop(data->mlx);
 	return (0);
@@ -194,6 +195,7 @@ void	init_data(t_data *data)
 	data->row_len = 0;
 	data->col_len = 0;
 	data->rotation = 0;
+	data->z_increase = 0;
 	data->mlx = NULL;
 	data->img = NULL;
 }
