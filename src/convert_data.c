@@ -140,11 +140,8 @@ void	add_z(t_data *data, int val)
 
 void	increment_z(t_data *data, int val)
 {
-	ft_memset(data->img->pixels, 0, data->img->width * data->img->height * 4);
 	add_z(data, val);
-	set_original_point_values(data);
-
-	render_data(data);
+	apply_rotation(data, data->rotation);
 }
 
 void	apply_rotation(t_data *data, int degree)
